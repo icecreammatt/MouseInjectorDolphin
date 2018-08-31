@@ -26,8 +26,6 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //==========================================================================
-#define DOLPHIN_PTR 0xE1EAC8 // offset within dolphin.exe module that points to gamecube memory
-
 extern uint8_t MEM_Init(void);
 extern void MEM_Quit(void);
 extern uint8_t MEM_UpdateEmuoffset(void);
