@@ -5,4 +5,4 @@ This is an unfinished prototype for Dolphin 5.0 build 8414. It supports the Time
 ManyMouse is Copyright (c) 2005-2012 Ryan C. Gordon and others. https://icculus.org/manymouse/
 
 # Download
-https://github.com/carnivoroussociety/MouseInjectorDolphin/releases
+https://github.com/carnivoroussociety/MouseInjectorDolphin/releases/download/v0.2/dolphin5.0-timesplitters3-alpha.7z
