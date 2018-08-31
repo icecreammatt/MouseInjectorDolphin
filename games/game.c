@@ -35,9 +35,7 @@ static const GAMEDRIVER **GAMELIST[] =
 static const GAMEDRIVER *CURRENT_GAME = NULL;
 
 uint8_t GAME_Status(void);
-const char *GAME_Name(void);
 void GAME_Inject(void);
-void GAME_Quit(void);
 
 uint8_t GAME_Status(void)
 {
