@@ -61,7 +61,6 @@ static uint8_t TS3_Status(void)
 //==========================================================================
 static void TS3_Inject(void)
 {
-	MOUSE_Update(); // update xrot and yrot vars so injection use latest mouse input
 	if(xmouse == 0 && ymouse == 0) // if mouse is idle
 		return;
 	const uint32_t playerbase = (uint32_t)MEM_ReadInt(TS3_playerbase);

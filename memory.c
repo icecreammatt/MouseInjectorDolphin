@@ -32,7 +32,7 @@
 #include <psapi.h>
 #include "memory.h"
 
-#define DOLPHIN_PTR 0xE1EAC8 // offset within dolphin.exe module that points to gamecube memory
+#define DOLPHIN_PTR 0xE794C8 // offset within dolphin.exe module that points to gamecube memory
 
 static uint64_t emuoffset = 0;
 static HANDLE emuhandle = NULL;
@@ -102,7 +102,7 @@ uint8_t MEM_UpdateEmuoffset(void)
 			}
 		}
 	}
-	return (!!(emuoffset)); // convert to bool and return
+	return !(!emuoffset); // convert to bool and return
 }
 //==========================================================================
 // Purpose: read interger from memory, then return memory value

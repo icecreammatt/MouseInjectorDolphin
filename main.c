@@ -81,13 +81,16 @@ int32_t main(void)
 	atexit(quit); // set function to run when program is closed
 	while(1) // loop forever
 	{
-		GUI_Interact();
+		GUI_Interact(); // check hotkey input
 		if(mousetoggle)
 		{
-			if(GAME_Status())
-				GAME_Inject();
-			else
-				MEM_UpdateEmuoffset();
+			if(GAME_Status()) // if supported games have been detected
+			{
+				MOUSE_Update(); // update xmouse and ymouse vars so injection use latest mouse input
+				GAME_Inject(); // inject mouselook to game
+			}
+			else if(!MEM_UpdateEmuoffset()) // if emuoffset failed to update (dolphin has no game loaded), wait 100 ms and try again
+				Sleep(100);
 		}
 		Sleep(TICKRATE);
 	}

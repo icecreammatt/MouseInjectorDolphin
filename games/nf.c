@@ -71,7 +71,6 @@ static uint8_t NF_Status(void)
 //==========================================================================
 static void NF_Inject(void)
 {
-	MOUSE_Update(); // update xrot and yrot vars so injection use latest mouse input
 	if(xmouse == 0 && ymouse == 0) // if mouse is idle
 		return;
 	const uint32_t playerbase = (uint32_t)MEM_ReadInt(NF_playerbase);
