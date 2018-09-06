@@ -201,10 +201,7 @@ static void GUI_Interact(void)
 static void GUI_Update(void)
 {
 	GUI_Clear();
-	if(GAME_Name() == NULL)
-		printf("\n Mouse Injector for %s %s\n", DOLPHINVERSION, BUILDINFO); // title
-	else
-		printf("\n Mouse Injector for %s %s\n", GAME_Name(), BUILDINFO); // title with current game's name
+	printf("\n Mouse Injector for %s %s\n", GAME_Name() == NULL ? DOLPHINVERSION : GAME_Name(), BUILDINFO); // title
 	printf("%s\n\n   Main Menu - Press [#] to Use Menu\n\n\n", LINE);
 	printf(mousetoggle ? "   [4] - [ON] Mouse Injection" : "   [4] - [OFF] Mouse Injection");
 	if(!locksettings)
