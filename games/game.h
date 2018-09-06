@@ -20,7 +20,7 @@
 typedef struct
 {
 	const char *Name;
-    uint8_t (*Status)(void);
+	uint8_t (*Status)(void);
 	void (*Inject)(void);
 } GAMEDRIVER;
 
