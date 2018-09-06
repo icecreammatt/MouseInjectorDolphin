@@ -63,13 +63,13 @@ int32_t main(void)
 	GUI_Init();
 	if(!MEM_Init()) // close if dolphin was not detected
 	{
-		printf("\n %s%s\n\n   Dolphin not detected. Closing...", TITLE, LINE);
+		printf("\n Mouse Injector for %s %s\n%s\n\n   Dolphin not detected. Closing...", DOLPHINVERSION, BUILDINFO, LINE);
 		Sleep(3000);
 		return 0;
 	}
 	if(!MOUSE_Init()) // close if mouse was not detected
 	{
-		printf("\n %s%s\n\n   Mouse not detected. Closing...", TITLE, LINE);
+		printf("\n Mouse Injector for %s %s\n%s\n\n   Mouse not detected. Closing...", DOLPHINVERSION, BUILDINFO, LINE);
 		Sleep(3000);
 		MEM_Quit();
 		return 0;
@@ -122,10 +122,10 @@ static void GUI_Init(void)
 //==========================================================================
 static void GUI_Welcome(void)
 {
-	printf("\n   %s%s\n\n   Addendum - Please Read before Use\n\n\n", TITLE, LINE);
+	printf("\n    Mouse Injector for %s %s\n%s\n\n   Addendum - Please Read before Use\n\n\n", DOLPHINVERSION, BUILDINFO, LINE);
 	printf("    1)  This is a unfinished test, expect issues and crashes\n\n");
-	printf("    2)  Made for the NTSC releases of TimeSplitters 2/3 and 007: NightFire\n\n");
-	printf("    3)  This will only work with game IDs matching: GTSE4F/G3FE69/GO7E69\n\n");
+	printf("    2)  Made for the NTSC releases of TimeSplitters 2/3, 007: NightFire & MoH:F\n\n");
+	printf("    3)  This will only work with these game IDs: GTSE4F/G3FE69/GO7E69/GMFE69\n\n");
 	printf("    4)  You must use the included Dolphin bundle or it will not work\n\n");
 	printf("    5)  Please do not install over different versions of Dolphin\n\n");
 	printf("    6)  All sub-systems are unsupported - use arrow keys for sentries/map maker\n\n");
@@ -201,7 +201,11 @@ static void GUI_Interact(void)
 static void GUI_Update(void)
 {
 	GUI_Clear();
-	printf("\n %s%s\n\n   Main Menu - Press [#] to Use Menu\n\n\n", TITLE, LINE); // title
+	if(GAME_Name() == NULL)
+		printf("\n Mouse Injector for %s %s\n", DOLPHINVERSION, BUILDINFO); // title
+	else
+		printf("\n Mouse Injector for %s %s\n", GAME_Name(), BUILDINFO); // title with current game's name
+	printf("%s\n\n   Main Menu - Press [#] to Use Menu\n\n\n", LINE);
 	printf(mousetoggle ? "   [4] - [ON] Mouse Injection" : "   [4] - [OFF] Mouse Injection");
 	if(!locksettings)
 	{

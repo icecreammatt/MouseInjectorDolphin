@@ -41,6 +41,7 @@ static void TS3_Inject(void);
 
 static const GAMEDRIVER GAMEDRIVER_INTERFACE =
 {
+	"TimeSplitters: Future Perfect",
 	TS3_Status,
 	TS3_Inject
 };

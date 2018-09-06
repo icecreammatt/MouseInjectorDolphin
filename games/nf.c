@@ -51,6 +51,7 @@ static void NF_Inject(void);
 
 static const GAMEDRIVER GAMEDRIVER_INTERFACE =
 {
+	"007: NightFire",
 	NF_Status,
 	NF_Inject
 };

@@ -26,8 +26,8 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //==========================================================================
-#define TITLE "TimeSplitters 2/3 Mouse Injector ("__MIVERSION__" - "__DATE__")\n"
-#define __MIVERSION__ "v0.2"
+#define DOLPHINVERSION "Dolphin 5.0-8715"
+#define BUILDINFO "(v0.21 - "__DATE__")"
 #define LINE "_______________________________________________________________"
 #define TICKRATE 1 // run mouse injector at 1000 Hz
 // input for interface

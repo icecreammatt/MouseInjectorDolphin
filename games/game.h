@@ -19,9 +19,11 @@
 //==========================================================================
 typedef struct
 {
+	const char *Name;
     uint8_t (*Status)(void);
 	void (*Inject)(void);
 } GAMEDRIVER;
 
 extern uint8_t GAME_Status(void);
 extern void GAME_Inject(void);
+extern const char *GAME_Name(void);

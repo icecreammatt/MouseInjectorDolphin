@@ -21,7 +21,7 @@ WARNINGS = -Wextra -pedantic -Wno-parentheses
 RESFLAGS = -F pe-x86-64 --input-format=rc -O coff
 
 #Linker flags
-OBJS = $(OBJDIR)main.o $(OBJDIR)memory.o $(OBJDIR)mouse.o $(OBJDIR)game.o $(OBJDIR)ts2.o $(OBJDIR)ts3.o $(OBJDIR)nf.o $(OBJDIR)manymouse.o $(OBJDIR)windows_wminput.o $(OBJDIR)icon.res
+OBJS = $(OBJDIR)main.o $(OBJDIR)memory.o $(OBJDIR)mouse.o $(OBJDIR)game.o $(OBJDIR)ts2.o $(OBJDIR)ts3.o $(OBJDIR)nf.o $(OBJDIR)mohf.o $(OBJDIR)manymouse.o $(OBJDIR)windows_wminput.o $(OBJDIR)icon.res
 LIBS = -static-libgcc -lpsapi
 LFLAGS = $(OBJS) -o $(EXENAME) $(LIBS) -m64 -s
 
@@ -52,6 +52,9 @@ $(OBJDIR)ts3.o: $(GAMESDIR)ts3.c $(SRCDIR)main.h $(SRCDIR)memory.h $(SRCDIR)mous
 
 $(OBJDIR)nf.o: $(GAMESDIR)nf.c $(SRCDIR)main.h $(SRCDIR)memory.h $(SRCDIR)mouse.h $(GAMESDIR)game.h
 	$(CC) -c $(GAMESDIR)nf.c -o $(OBJDIR)nf.o $(CFLAGS) $(WARNINGS)
+
+$(OBJDIR)mohf.o: $(GAMESDIR)mohf.c $(SRCDIR)main.h $(SRCDIR)memory.h $(SRCDIR)mouse.h $(GAMESDIR)game.h
+	$(CC) -c $(GAMESDIR)mohf.c -o $(OBJDIR)mohf.o $(CFLAGS) $(WARNINGS)
 
 $(OBJDIR)manymouse.o: $(MANYMOUSEDIR)manymouse.c $(MANYMOUSEDIR)manymouse.h
 	$(CC) -c $(MANYMOUSEDIR)manymouse.c -o $(OBJDIR)manymouse.o $(CFLAGS) $(WARNINGS)

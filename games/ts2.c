@@ -37,6 +37,7 @@ static void TS2_Inject(void);
 
 static const GAMEDRIVER GAMEDRIVER_INTERFACE =
 {
+	"TimeSplitters 2",
 	TS2_Status,
 	TS2_Inject
 };

@@ -17,26 +17,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, visit http://www.gnu.org/licenses/gpl-2.0.html
 //==========================================================================
-#include <stdlib.h>
 #include <stdint.h>
 #include "game.h"
 
 extern const GAMEDRIVER *GAME_TS2;
 extern const GAMEDRIVER *GAME_TS3;
 extern const GAMEDRIVER *GAME_NF;
+extern const GAMEDRIVER *GAME_MOHF;
 
 static const GAMEDRIVER **GAMELIST[] =
 {
 	&GAME_TS2,
 	&GAME_TS3,
-	&GAME_NF
+	&GAME_NF,
+	&GAME_MOHF
 };
 
 static const GAMEDRIVER *CURRENT_GAME = NULL;
 
 uint8_t GAME_Status(void);
 void GAME_Inject(void);
+const char *GAME_Name(void);
 
+//==========================================================================
+// Purpose: check all game interfaces for game
+//==========================================================================
 uint8_t GAME_Status(void)
 {
 	const uint8_t upper = (sizeof(GAMELIST) / sizeof(GAMELIST[0]));
@@ -50,9 +55,18 @@ uint8_t GAME_Status(void)
 	}
 	return CURRENT_GAME != NULL ? 1 : 0;
 }
-
+//==========================================================================
+// Purpose: inject via game driver
+//==========================================================================
 void GAME_Inject(void)
 {
 	if(CURRENT_GAME)
 		CURRENT_GAME->Inject();
+}
+//==========================================================================
+// Purpose: return game driver name
+//==========================================================================
+const char *GAME_Name(void)
+{
+	return CURRENT_GAME ? CURRENT_GAME->Name : NULL;
 }
