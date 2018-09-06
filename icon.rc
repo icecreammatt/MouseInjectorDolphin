@@ -36,12 +36,12 @@ PRODUCTVERSION 0,2,1,0
 		BLOCK "040904E4"
 		{
 			VALUE "FileVersion", "0, 2, 1, 0"
-			VALUE "FileDescription", "Mouse Injector for TimeSplitters"
+			VALUE "FileDescription", "Mouse Injector for Dolphin"
 			VALUE "InternalName", "Mouse Injector"
 			VALUE "LegalCopyright", "Copyright (C) 2018 Carnivorous"
 			VALUE "LegalTrademarks", ""
 			VALUE "OriginalFilename", "Mouse Injector.exe"
-			VALUE "ProductName", "Mouse Injector for TimeSplitters"
+			VALUE "ProductName", "Mouse Injector for Dolphin"
 			VALUE "ProductVersion", "0, 2, 1, 0"
 			VALUE "CompanyName", ""
 		}
