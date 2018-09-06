@@ -89,8 +89,11 @@ int32_t main(void)
 				MOUSE_Update(); // update xmouse and ymouse vars so injection use latest mouse input
 				GAME_Inject(); // inject mouselook to game
 			}
-			else if(!MEM_UpdateEmuoffset()) // if emuoffset failed to update (dolphin has no game loaded), wait 100 ms and try again
+			else // dolphin has no game loaded or game not found, wait 100 ms and try again
+			{
+				MEM_UpdateEmuoffset();
 				Sleep(100);
+			}
 		}
 		Sleep(TICKRATE);
 	}

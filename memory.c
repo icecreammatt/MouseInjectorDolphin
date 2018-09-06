@@ -39,7 +39,7 @@ static HANDLE emuhandle = NULL;
 
 uint8_t MEM_Init(void);
 void MEM_Quit(void);
-uint8_t MEM_UpdateEmuoffset(void);
+void MEM_UpdateEmuoffset(void);
 int32_t MEM_ReadInt(const uint32_t addr);
 float MEM_ReadFloat(const uint32_t addr);
 void MEM_WriteInt(const uint32_t addr, uint32_t value);
@@ -82,7 +82,7 @@ void MEM_Quit(void)
 // Purpose: update emuoffset pointer to location of gamecube memory
 // Changed Globals: emuoffset
 //==========================================================================
-uint8_t MEM_UpdateEmuoffset(void)
+void MEM_UpdateEmuoffset(void)
 {
 	emuoffset = 0;
 	HMODULE modules[1024]; // stores all modules for process
@@ -102,7 +102,6 @@ uint8_t MEM_UpdateEmuoffset(void)
 			}
 		}
 	}
-	return !(!emuoffset); // convert to bool and return
 }
 //==========================================================================
 // Purpose: read interger from memory, then return memory value
