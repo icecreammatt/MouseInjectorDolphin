@@ -124,7 +124,7 @@ static void GUI_Welcome(void)
 {
 	printf("\n    Mouse Injector for %s %s\n%s\n\n   Addendum - Please Read before Use\n\n\n", DOLPHINVERSION, BUILDINFO, LINE);
 	printf("    1)  This is a unfinished test, expect issues and crashes\n\n");
-	printf("    2)  Made for the NTSC releases of TimeSplitters 2/3, 007: NightFire & MoH:F\n\n");
+	printf("    2)  Made for the NTSC releases of TimeSplitters, 007: NightFire & MoH:F\n\n");
 	printf("    3)  This will only work with these game IDs: GTSE4F/G3FE69/GO7E69/GMFE69\n\n");
 	printf("    4)  You must use the included Dolphin bundle or it will not work\n\n");
 	printf("    5)  Please do not install over different versions of Dolphin\n\n");

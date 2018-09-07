@@ -39,7 +39,7 @@
 #define K_PLUS (GetAsyncKeyState(0x6B) || GetAsyncKeyState(0xBB)) // key '+'
 #define K_MINUS (GetAsyncKeyState(0x6D) || GetAsyncKeyState(0xBD)) // key '-'
 
-static inline float ClampFloat(const float value, const float min, const float max) // used commonly for game drivers
+static inline float ClampFloat(const float value, const float min, const float max)
 {
 	const float test = value < min ? min : value;
 	return test > max ? max : test;
