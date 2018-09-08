@@ -39,7 +39,7 @@ void MOUSE_Quit(void);
 void MOUSE_Update(void);
 
 //==========================================================================
-// Purpose: initialize manymouse and returns init
+// Purpose: initialize manymouse and returns detected devices (0 = not found)
 //==========================================================================
 uint8_t MOUSE_Init(void)
 {
@@ -53,7 +53,7 @@ void MOUSE_Quit(void)
 	ManyMouse_Quit();
 }
 //==========================================================================
-// Purpose: lock cursor in place
+// Purpose: update cursor lock position
 //==========================================================================
 void MOUSE_Lock(void)
 {
