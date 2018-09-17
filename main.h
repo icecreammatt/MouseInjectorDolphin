@@ -38,14 +38,17 @@
 #define K_CTRL0 (GetAsyncKeyState(0x11) && GetAsyncKeyState(0x30) || GetAsyncKeyState(0x30) && GetAsyncKeyState(0x11)) // key combo control + '0'
 #define K_PLUS (GetAsyncKeyState(0x6B) || GetAsyncKeyState(0xBB)) // key '+'
 #define K_MINUS (GetAsyncKeyState(0x6D) || GetAsyncKeyState(0xBD)) // key '-'
+#if _MSC_VER && !__INTEL_COMPILER // here because some MSVC versions only support __inline :/
+#define inline __inline
+#endif
 
-static inline float ClampFloat(const float value, const float min, const float max)
+inline float ClampFloat(const float value, const float min, const float max)
 {
 	const float test = value < min ? min : value;
 	return test > max ? max : test;
 }
 
-static inline int32_t ClampInt(const int32_t value, const int32_t min, const int32_t max)
+inline int32_t ClampInt(const int32_t value, const int32_t min, const int32_t max)
 {
 	const int32_t test = value < min ? min : value;
 	return test > max ? max : test;
