@@ -26,7 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //==========================================================================
-#define DOLPHINVERSION "Dolphin 5.0-8715"
+#define DOLPHINVERSION "Dolphin 5.0-8743"
 #define BUILDINFO "(v0.21 - "__DATE__")"
 #define LINE "_______________________________________________________________"
 #define TICKRATE 1 // run mouse injector at 1000 Hz
