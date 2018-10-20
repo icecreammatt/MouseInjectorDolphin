@@ -1,5 +1,5 @@
-# Mouse Injector for Dolphin 5.0 (8804)
-This is an unfinished, alpha prototype for Dolphin 5.0 build 8804. It supports the following games
+# Mouse Injector for Dolphin 5.0 (8915)
+This is an unfinished, alpha prototype for Dolphin 5.0 build 8915. It supports the following games
 * TimeSplitters 2
 * TimeSplitters: Future Perfect
 * 007: NightFire
