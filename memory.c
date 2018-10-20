@@ -32,7 +32,8 @@
 #include <psapi.h>
 #include "memory.h"
 
-#define DOLPHIN_PTR 0xE796B8 // offset within dolphin.exe module that points to gamecube memory
+#define DOLPHIN_PTR 0xE7C898 // offset within dolphin.exe module that points to gamecube memory
+#define NOTWITHINRANGE(X) (X < 0x80000000 || X > 0x81800000) // if X is outside of GC memory range
 
 static uint64_t emuoffset = 0;
 static HANDLE emuhandle = NULL;
@@ -98,6 +99,7 @@ void MEM_UpdateEmuoffset(void)
 				{
 					uint64_t gamebase = (uint64_t)modules[index];
 					ReadProcessMemory(emuhandle, (LPVOID)(gamebase + DOLPHIN_PTR), &emuoffset, sizeof(emuoffset), NULL);
+					break;
 				}
 			}
 		}
@@ -109,7 +111,7 @@ void MEM_UpdateEmuoffset(void)
 //==========================================================================
 int32_t MEM_ReadInt(const uint32_t addr)
 {
-	if(!emuoffset || addr < 0x80000000 || addr > 0x81800000) // if gamecube memory has not been init by dolphin or reading from outside of RAM
+	if(!emuoffset || NOTWITHINRANGE(addr)) // if gamecube memory has not been init by dolphin or reading from outside of memory range
 		return 0;
 	int32_t output; // temp var used for output of function
 	ReadProcessMemory(emuhandle, (LPVOID)(emuoffset + (addr - 0x80000000)), &output, sizeof(output), NULL);
@@ -122,7 +124,7 @@ int32_t MEM_ReadInt(const uint32_t addr)
 //==========================================================================
 float MEM_ReadFloat(const uint32_t addr)
 {
-	if(!emuoffset || addr < 0x80000000 || addr > 0x81800000) // if gamecube memory has not been init by dolphin or reading from outside of RAM
+	if(!emuoffset || NOTWITHINRANGE(addr)) // if gamecube memory has not been init by dolphin or reading from outside of memory range
 		return 0;
 	float output; // temp var used for output of function
 	ReadProcessMemory(emuhandle, (LPVOID)(emuoffset + (addr - 0x80000000)), &output, sizeof(output), NULL);
@@ -135,7 +137,7 @@ float MEM_ReadFloat(const uint32_t addr)
 //==========================================================================
 void MEM_WriteInt(const uint32_t addr, uint32_t value)
 {
-	if(!emuoffset || addr < 0x80000000 || addr > 0x81800000) // if gamecube memory has not been init by dolphin or reading from outside of RAM
+	if(!emuoffset || NOTWITHINRANGE(addr)) // if gamecube memory has not been init by dolphin or reading from outside of memory range
 		return;
 	__asm__("bswapl %0" : "=r" (value) : "0" (value)); // byteswap in assembly
 	WriteProcessMemory(emuhandle, (LPVOID)(emuoffset + (addr - 0x80000000)), &value, sizeof(value), NULL);
@@ -146,7 +148,7 @@ void MEM_WriteInt(const uint32_t addr, uint32_t value)
 //==========================================================================
 void MEM_WriteFloat(const uint32_t addr, float value)
 {
-	if(!emuoffset || addr < 0x80000000 || addr > 0x81800000) // if gamecube memory has not been init by dolphin or reading from outside of RAM
+	if(!emuoffset || NOTWITHINRANGE(addr)) // if gamecube memory has not been init by dolphin or reading from outside of memory range
 		return;
 	__asm__("bswapl %0" : "=r" (value) : "0" (value)); // byteswap in assembly
 	WriteProcessMemory(emuhandle, (LPVOID)(emuoffset + (addr - 0x80000000)), &value, sizeof(value), NULL);
