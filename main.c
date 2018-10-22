@@ -70,8 +70,8 @@ int32_t main(void)
 	if(!MOUSE_Init()) // close if mouse was not detected
 	{
 		printf("\n Mouse Injector for %s %s\n%s\n\n   Mouse not detected. Closing...", DOLPHINVERSION, BUILDINFO, LINE);
-		Sleep(3000);
 		MEM_Quit();
+		Sleep(3000);
 		return 0;
 	}
 	INI_Load(); // load settings
@@ -84,7 +84,7 @@ int32_t main(void)
 		GUI_Interact(); // check hotkey input
 		if(mousetoggle)
 		{
-			if(GAME_Status()) // if supported games have been detected
+			if(GAME_Status()) // if supported game has been detected
 			{
 				MOUSE_Update(); // update xmouse and ymouse vars so injection use latest mouse input
 				GAME_Inject(); // inject mouselook to game
