@@ -32,7 +32,7 @@
 #include <psapi.h>
 #include "memory.h"
 
-#define DOLPHIN_PTR 0xE7C898 // offset within dolphin.exe module that points to gamecube memory
+#define DOLPHIN_PTR 0xE80968 // offset within dolphin.exe module that points to gamecube memory
 #define NOTWITHINRANGE(X) (X < 0x80000000 || X > 0x81800000) // if X is outside of GC memory range
 
 static uint64_t emuoffset = 0;
