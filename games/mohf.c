@@ -67,7 +67,7 @@ static void MOHF_Inject(void)
 	if(xmouse == 0 && ymouse == 0) // if mouse is idle
 		return;
 	const uint32_t playerbase = (uint32_t)MEM_ReadInt(MOHF_playerbase);
-	if(playerbase > 0x80000000 && playerbase < 0x81800000) // if playerbase is valid
+	if(WITHINMEMRANGE(playerbase)) // if playerbase is valid
 	{
 		const int sentryflag = MEM_ReadInt(playerbase + MOHF_sentryflag);
 		const float fov = MEM_ReadFloat(playerbase + MOHF_fov);

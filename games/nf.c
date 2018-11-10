@@ -75,7 +75,7 @@ static void NF_Inject(void)
 	if(xmouse == 0 && ymouse == 0) // if mouse is idle
 		return;
 	const uint32_t playerbase = (uint32_t)MEM_ReadInt(NF_playerbase);
-	if(playerbase > 0x80000000 && playerbase < 0x81800000) // if playerbase is valid
+	if(WITHINMEMRANGE(playerbase)) // if playerbase is valid
 	{
 		if(MEM_ReadInt(playerbase + NF_lookspring) == 0x03010002) // disable lookspring when spawned
 			MEM_WriteInt(playerbase + NF_lookspring, 0x01010002);

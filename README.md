@@ -1,4 +1,4 @@
-# Mouse Injector for Dolphin 5.0 (8987)
+# Mouse Injector for Dolphin 5.0 (9111)
 This is an unfinished, alpha prototype for Dolphin 5.0 build 8987. It supports the following games
 * TimeSplitters 2
 * TimeSplitters: Future Perfect

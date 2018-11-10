@@ -26,6 +26,9 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //==========================================================================
+#define NOTWITHINMEMRANGE(X) (X < 0x80000000 || X > 0x81800000) // if X is not within GC memory range
+#define WITHINMEMRANGE(X) (X > 0x80000000 && X < 0x81800000) // if X is within GC memory range
+
 extern uint8_t MEM_Init(void);
 extern void MEM_Quit(void);
 extern void MEM_UpdateEmuoffset(void);
