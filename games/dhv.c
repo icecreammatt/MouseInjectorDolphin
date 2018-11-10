@@ -92,7 +92,6 @@ static uint8_t DHV_DetectPlayer(void)
 //==========================================================================
 // Purpose: calculate mouse movement and inject into current game
 //==========================================================================
-uint32_t oldbase = 0;
 static void DHV_Inject(void)
 {
 	if(!DHV_DetectPlayer()) // if player pointer was not found
