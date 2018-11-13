@@ -82,7 +82,7 @@ static uint8_t DHV_DetectPlayer(void)
 	const uint32_t tempcrosshairy = MEM_ReadInt(tempplayerbase + DHV_crosshairy);
 	const uint32_t temphealth = MEM_ReadInt(tempplayerbase + DHV_health);
 	const uint32_t tempheight = MEM_ReadInt(tempplayerbase + DHV_height);
-	if(WITHINMEMRANGE(tempplayerbase) && tempcamx < 0x40C90FDB && tempcamy == 0 && tempcrosshairx == 0 && tempcrosshairy == 0 && temphealth > 0 && temphealth <= 0x3F800000 && tempheight >= 0x3F000000 && tempheight <= 0x40400000) // test for valid player pointer
+	if(WITHINMEMRANGE(tempplayerbase) && tempcamx < 0x40C90FDB && tempcamy == 0 && tempcrosshairx == 0 && tempcrosshairy == 0 && temphealth > 0 && temphealth <= 0x3F800000 && tempheight == 0x40400000) // test for valid player pointer
 	{
 		playerbase = tempplayerbase;
 		return 1;
