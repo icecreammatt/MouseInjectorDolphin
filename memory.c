@@ -32,7 +32,7 @@
 #include <psapi.h>
 #include "memory.h"
 
-#define DOLPHIN_PTR 0xE889E8 // offset within dolphin.exe module that points to gamecube memory
+#define DOLPHIN_PTR 0xE95AE8 // offset within dolphin.exe module that points to gamecube memory
 
 static uint64_t emuoffset = 0;
 static HANDLE emuhandle = NULL;
