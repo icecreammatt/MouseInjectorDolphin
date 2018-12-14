@@ -236,7 +236,7 @@ static void GUI_ListGames(void)
 {
 	GUI_Clear();
 	printf("\n Mouse Injector for %s %s\n%s\n\n", DOLPHINVERSION, BUILDINFO, LINE);
-	printf("   List of Supported Games\t\t\tGame IDs\n%s\n\n\n\n", LINE);
+	printf("   List of Supported Games (NTSC)\t\tGame IDs\n%s\n\n\n\n", LINE);
 	printf("    TimeSplitters 2\t\t\t\t GTSE4F\n\n");
 	printf("    TimeSplitters: Future Perfect\t\t G3FE69\n\n");
 	printf("    007: NightFire\t\t\t\t GO7E69\n\n");
