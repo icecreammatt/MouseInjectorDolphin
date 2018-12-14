@@ -1,5 +1,5 @@
 # Mouse Injector for Dolphin 5.0 (9209)
-This is an unfinished, alpha prototype for Dolphin. It supports the following games
+This is an __unfinished, alpha prototype__ for Dolphin. It supports the following games
 * TimeSplitters 2
 * TimeSplitters: Future Perfect
 * 007: NightFire
