@@ -26,7 +26,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //==========================================================================
-#define DOLPHINVERSION "Dolphin 5.0-9156"
+#define DOLPHINVERSION "Dolphin 5.0-9209"
 #define BUILDINFO "(v0.21 - "__DATE__")"
 #define LINE "_______________________________________________________________"
 #define TICKRATE 1 // run mouse injector at 1000 Hz
@@ -36,8 +36,10 @@
 #define K_6 GetAsyncKeyState(0x36) // key '6'
 #define K_7 GetAsyncKeyState(0x37) // key '7'
 #define K_CTRL0 (GetAsyncKeyState(0x11) && GetAsyncKeyState(0x30) || GetAsyncKeyState(0x30) && GetAsyncKeyState(0x11)) // key combo control + '0'
+#define K_CTRL1 (GetAsyncKeyState(0x11) && GetAsyncKeyState(0x31) || GetAsyncKeyState(0x31) && GetAsyncKeyState(0x11)) // key combo control + '1'
 #define K_PLUS (GetAsyncKeyState(0x6B) || GetAsyncKeyState(0xBB)) // key '+'
 #define K_MINUS (GetAsyncKeyState(0x6D) || GetAsyncKeyState(0xBD)) // key '-'
+#define K_INSERT GetAsyncKeyState(0x2D) // key 'Insert'
 #if _MSC_VER && !__INTEL_COMPILER // here because some MSVC versions only support __inline :/
 #define inline __inline
 #endif

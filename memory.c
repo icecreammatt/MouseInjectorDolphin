@@ -32,7 +32,7 @@
 #include <psapi.h>
 #include "memory.h"
 
-#define DOLPHIN_PTR 0xE95AE8 // offset within dolphin.exe module that points to gamecube memory
+#define DOLPHIN_PTR 0xE95B08 // offset within dolphin.exe module that points to gamecube memory
 
 static uint64_t emuoffset = 0;
 static HANDLE emuhandle = NULL;
@@ -105,7 +105,7 @@ void MEM_UpdateEmuoffset(void)
 	}
 }
 //==========================================================================
-// Purpose: read interger from memory, then return memory value
+// Purpose: read int from memory
 // Parameter: address location
 //==========================================================================
 int32_t MEM_ReadInt(const uint32_t addr)
@@ -118,7 +118,7 @@ int32_t MEM_ReadInt(const uint32_t addr)
 	return output;
 }
 //==========================================================================
-// Purpose: read float from memory, then return memory value
+// Purpose: read float from memory
 // Parameter: address location
 //==========================================================================
 float MEM_ReadFloat(const uint32_t addr)
@@ -131,7 +131,7 @@ float MEM_ReadFloat(const uint32_t addr)
 	return output;
 }
 //==========================================================================
-// Purpose: write int to memory location
+// Purpose: write int to memory
 // Parameter: address location and value
 //==========================================================================
 void MEM_WriteInt(const uint32_t addr, uint32_t value)
@@ -142,7 +142,7 @@ void MEM_WriteInt(const uint32_t addr, uint32_t value)
 	WriteProcessMemory(emuhandle, (LPVOID)(emuoffset + (addr - 0x80000000)), &value, sizeof(value), NULL);
 }
 //==========================================================================
-// Purpose: write float to memory location
+// Purpose: write float to memory
 // Parameter: address location and value
 //==========================================================================
 void MEM_WriteFloat(const uint32_t addr, float value)

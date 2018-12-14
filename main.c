@@ -51,6 +51,7 @@ static void GUI_Init(void);
 static void GUI_Welcome(void);
 static void GUI_Interact(void);
 static void GUI_Update(void);
+static void GUI_ListGames(void);
 static void GUI_Clear(void);
 static void INI_Load(void);
 static void INI_Save(void);
@@ -79,7 +80,7 @@ int32_t main(void)
 		GUI_Welcome(); // show welcome message - wait for user input before continuing
 	GUI_Update(); // update screen with options
 	atexit(quit); // set function to run when program is closed
-	while(1) // loop forever
+	while(1)
 	{
 		GUI_Interact(); // check hotkey input
 		if(mousetoggle)
@@ -122,22 +123,19 @@ static void GUI_Init(void)
 //==========================================================================
 static void GUI_Welcome(void)
 {
-	printf("\n    Mouse Injector for %s %s\n%s\n\n   Addendum - Please Read before Use\n\n\n", DOLPHINVERSION, BUILDINFO, LINE);
+	printf("\n    Mouse Injector for %s %s\n%s\n\n   Addendum - Please Read before Use\n\n\n\n", DOLPHINVERSION, BUILDINFO, LINE);
 	printf("    1)  This is a unfinished test, expect issues and crashes\n\n");
-	printf("    2)  Made for the NTSC releases of TimeSplitters, 007: NightFire & MoH:F\n\n");
-	printf("    3)  This will only work with these game IDs: GTSE4F/G3FE69/GO7E69/GMFE69\n\n");
-	printf("    4)  You must use the included Dolphin bundle or it will not work\n\n");
-	printf("    5)  Please do not install over different versions of Dolphin\n\n");
-	printf("    6)  All sub-systems are unsupported - use arrow keys for sentries/map maker\n\n");
-	printf("    7)  Read readme.txt for a quick start guide - thank you and enjoy\n\n");
-	printf("\n   Press CTRL+0 to confirm you've read this message...\n%s\n", LINE);
-	while(1)
+	printf("    2)  You must use the included Dolphin bundle or it will not work\n\n");
+	printf("    3)  Please do not install over different versions of Dolphin\n\n");
+	printf("    4)  All sub-systems are unsupported - use arrow keys for sentries/map maker\n\n");
+	printf("    5)  Read readme.txt for a quick start guide - thank you and enjoy\n\n\n\n\n\n");
+	printf("   Press CTRL+1 to confirm you've read this message...\n%s\n", LINE);
+	while(!welcomed)
 	{
+		if(K_CTRL1) // if user pressed CTRL+1
+			welcomed = 1;
 		Sleep(250);
-		if(K_CTRL0) // wait for user input before continuing
-			break;
 	}
-	welcomed = 1;
 }
 //==========================================================================
 // Purpose: checks keyboard and will update internal values
@@ -184,6 +182,14 @@ static void GUI_Interact(void)
 			crosshair--, updateinterface = 1;
 		updatequick = 1;
 	}
+	if(K_INSERT && !locksettings && !updateinterface) // show list of supported games (INSERT)
+	{
+		GUI_ListGames();
+		Sleep(5000); // wait 5 seconds
+		K_INSERT; // flush input
+		updateinterface = 1;
+		updatequick = 1;
+	}
 	if(K_CTRL0 && !updateinterface) // hide/show settings (CTRL+0)
 	{
 		locksettings = !locksettings;
@@ -203,21 +209,40 @@ static void GUI_Update(void)
 	GUI_Clear();
 	printf("\n Mouse Injector for %s %s\n", GAME_Name() == NULL ? DOLPHINVERSION : GAME_Name(), BUILDINFO); // title
 	printf("%s\n\n   Main Menu - Press [#] to Use Menu\n\n\n", LINE);
-	printf(mousetoggle ? "   [4] - [ON] Mouse Injection" : "   [4] - [OFF] Mouse Injection");
+	printf(mousetoggle ? "   [4] - [ON] Mouse Injection\n\n" : "   [4] - [OFF] Mouse Injection\n\n");
 	if(!locksettings)
 	{
-		printf("\n\n   [5] - Mouse Sensitivity: %d%%", sensitivity * 5);
+		printf("   [5] - Mouse Sensitivity: %d%%", sensitivity * 5);
 		printf(selectedoption == EDITINGSENSITIVITY ? " [+/-]\n\n" : "\n\n");
 		printf("   [6] - Crosshair Movement: ");
 		printf(crosshair ? "%d%%" : "Disabled", crosshair * 100 / 6);
 		printf(selectedoption == EDITINGCROSSHAIR ? " [+/-]\n\n" : "\n\n");
 		printf(invertpitch ? "   [7] - [ON] Invert Pitch\n\n" : "   [7] - [OFF] Invert Pitch\n\n");
-		printf("\n\n\n\n");
+		printf("\n\n\n\n\n");
+		printf("   [CTRL+0] - Lock Settings\n\n");
+		printf(" Note: [+/-] to Change Values - [Insert] for Supported Games\n%s\n", LINE);
 	}
 	else
-		printf("\n\n\n\n\n\n\n\n\n\n\n\n");
-	printf(!locksettings ? "\n   [CTRL+0] - Lock Settings" : "\n   [CTRL+0] - Unlock Settings");
-	printf("\n\n Note: [+/-] to Change Values\n%s\n", LINE);
+	{
+		printf("\n\n\n\n\n\n\n\n\n\n\n");
+		printf("   [CTRL+0] - Unlock Settings\n\n");
+		printf(" Note: [+/-] to Change Values\n%s\n", LINE);
+	}
+}
+//==========================================================================
+// Purpose: print list of supported games
+//==========================================================================
+static void GUI_ListGames(void)
+{
+	GUI_Clear();
+	printf("\n Mouse Injector for %s %s\n%s\n\n", DOLPHINVERSION, BUILDINFO, LINE);
+	printf("   List of Supported Games\t\t\tGame IDs\n%s\n\n\n\n", LINE);
+	printf("    TimeSplitters 2\t\t\t\t GTSE4F\n\n");
+	printf("    TimeSplitters: Future Perfect\t\t G3FE69\n\n");
+	printf("    007: NightFire\t\t\t\t GO7E69\n\n");
+	printf("    Medal of Honor: Frontline\t\t\t GMFE69\n\n");
+	printf("    Die Hard: Vendetta\t\t\t\t GDIE7D\n\n\n\n\n");
+	printf("   Returning to Main Menu in 5 Seconds...\n%s\n", LINE);
 }
 //==========================================================================
 // Purpose: clear screen without using system("cls")
