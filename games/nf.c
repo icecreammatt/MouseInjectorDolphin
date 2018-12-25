@@ -1,7 +1,7 @@
 //==========================================================================
 // Mouse Injector for Dolphin
 //==========================================================================
-// Copyright (C) 2018 Carnivorous
+// Copyright (C) 2019 Carnivorous
 // All rights reserved.
 //
 // Mouse Injector is free software; you can redistribute it and/or modify it
