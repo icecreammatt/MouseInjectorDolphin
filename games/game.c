@@ -17,6 +17,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, visit http://www.gnu.org/licenses/gpl-2.0.html
 //==========================================================================
+#include <stdlib.h>
 #include <stdint.h>
 #include "game.h"
 
@@ -36,6 +37,7 @@ static const GAMEDRIVER **GAMELIST[] =
 };
 
 static const GAMEDRIVER *CURRENT_GAME = NULL;
+static const uint8_t upper = (sizeof(GAMELIST) / sizeof(GAMELIST[0]));
 
 uint8_t GAME_Status(void);
 void GAME_Inject(void);
@@ -46,7 +48,6 @@ const char *GAME_Name(void);
 //==========================================================================
 uint8_t GAME_Status(void)
 {
-	const uint8_t upper = (sizeof(GAMELIST) / sizeof(GAMELIST[0]));
 	const GAMEDRIVER *THIS_GAME;
 	CURRENT_GAME = NULL;
 	for(uint8_t i = 0; (i < upper) && (CURRENT_GAME == NULL); i++)
