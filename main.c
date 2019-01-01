@@ -119,7 +119,8 @@ static void GUI_Welcome(void)
 	printf("    2)  You must use the included Dolphin bundle or it will not work\n\n");
 	printf("    3)  Please do not install over different versions of Dolphin\n\n");
 	printf("    4)  All sub-systems are unsupported - use arrow keys for sentries/map maker\n\n");
-	printf("    5)  Read readme.txt for a quick start guide - thank you and enjoy\n\n\n\n\n\n");
+	printf("    5)  Press insert in the main menu to list supported games\n\n");
+	printf("    6)  Read readme.txt for a quick start guide - thank you and enjoy\n\n\n\n");
 	printf("   Press CTRL+1 to confirm you've read this message...\n%s\n", LINE);
 	while(!welcomed)
 	{
