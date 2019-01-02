@@ -10,4 +10,4 @@ This is an __unfinished, alpha prototype__ for Dolphin. It supports the followin
 ManyMouse is Copyright (c) 2005-2012 Ryan C. Gordon and others. https://icculus.org/manymouse/
 
 # Download
-https://github.com/carnivoroussociety/MouseInjectorDolphin/releases/download/v0.2/dolphin5.0-timesplitters3-alpha.7z
+https://github.com/carnivoroussociety/MouseInjectorDolphin/releases/download/v0.22/dolphin-5.0-9277-mouse-injector.7z
