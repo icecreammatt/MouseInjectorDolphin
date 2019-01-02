@@ -109,7 +109,7 @@ static void NF_Inject(void)
 	else // if playerbase is invalid, check for sentry mode
 	{
 		const uint32_t sentrybase = (uint32_t)MEM_ReadInt(NF_sentrybase);
-		if(sentrybase < 0x80000000 || sentrybase > 0x81800000) // if sentrybase is invalid
+		if(NOTWITHINMEMRANGE(sentrybase)) // if sentrybase is invalid
 			return;
 		float sentryx = MEM_ReadFloat(sentrybase + NF_sentryx);
 		float sentryy = MEM_ReadFloat(sentrybase + NF_sentryy);
