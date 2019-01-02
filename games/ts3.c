@@ -35,6 +35,7 @@
 #define TS3_playerbase 0x80611D74 // playable character pointer
 #define TS3_fovbase 0x80611D5C // fov base pointer
 #define TS3_crosshairsetting 0x80501680 // crosshair movement settings (1 == on and moving)
+#define TS3_yaxislimit 0x80611D7C
 
 static uint8_t TS3_Status(void);
 static void TS3_Inject(void);
@@ -64,6 +65,8 @@ static void TS3_Inject(void)
 {
 	if(xmouse == 0 && ymouse == 0) // if mouse is idle
 		return;
+	if(MEM_ReadInt(TS3_yaxislimit) != 0x42A00000) // overwrite y axis limit from 60 degrees (SP) or 75 degrees (MP)
+		MEM_WriteFloat(TS3_yaxislimit, 80.f);
 	const uint32_t playerbase = (uint32_t)MEM_ReadInt(TS3_playerbase);
 	const uint32_t fovbase = (uint32_t)MEM_ReadInt(TS3_fovbase);
 	if(!playerbase || !fovbase) // if playerbase or fovbase are invalid
@@ -71,7 +74,8 @@ static void TS3_Inject(void)
 	float camx = MEM_ReadFloat(playerbase + TS3_camx);
 	float camy = MEM_ReadFloat(playerbase + TS3_camy);
 	const float fov = MEM_ReadFloat(fovbase + TS3_fov);
-	if(/*camx >= 0 && camx < 360 &&*/camy >= -75 && camy <= 75 && fov <= 55 && fov > 3)
+	const float yaxislimit = MEM_ReadFloat(TS3_yaxislimit);
+	if(/*camx >= 0 && camx < 360 &&*/camy >= -yaxislimit && camy <= yaxislimit && fov <= 55 && fov > 3)
 	{
 		camx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) * (fov / 55.f); // normal calculation method for X
 		camy += (float)(!invertpitch ? -ymouse : ymouse) / 10.f * ((float)sensitivity / 40.f) * (fov / 55.f); // normal calculation method for Y
@@ -79,7 +83,7 @@ static void TS3_Inject(void)
 			camx += 360;
 		else if(camx >= 360)
 			camx -= 360;*/
-		camy = ClampFloat(camy, -75, 75);
+		camy = ClampFloat(camy, -yaxislimit, yaxislimit);
 		MEM_WriteFloat(playerbase + TS3_camx, camx);
 		MEM_WriteFloat(playerbase + TS3_camy, camy);
 		if(crosshair && MEM_ReadInt(TS3_crosshairsetting) <= 1) // if crosshair movement is enabled and turned on in-game

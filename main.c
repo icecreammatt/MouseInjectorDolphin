@@ -33,7 +33,7 @@ static uint8_t locksettings = 0;
 static uint8_t welcomed = 0;
 
 uint8_t sensitivity = 20;
-uint8_t crosshair = 3;
+uint8_t crosshair = 0;
 uint8_t invertpitch = 0;
 
 int32_t main(void);

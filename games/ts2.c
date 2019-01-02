@@ -31,6 +31,7 @@
 // STATIC ADDRESSES BELOW
 #define TS2_playerbase 0x804686CC // playable character pointer
 #define TS2_fov 0x8046818C
+#define TS2_yaxislimit 0x804686BC
 
 static uint8_t TS2_Status(void);
 static void TS2_Inject(void);
@@ -63,6 +64,8 @@ static void TS2_Inject(void)
 		MEM_WriteInt(0x8046DF70, 0x3F9B4852);
 		MEM_WriteInt(0x8046CE94, 0x3F9B4852);
 	}
+	if(MEM_ReadInt(TS2_yaxislimit) != 0x42A00000) // overwrite y axis limit from 40 degrees (SP) or 50 degrees (MP)
+		MEM_WriteFloat(TS2_yaxislimit, 80.f);
 	if(xmouse == 0 && ymouse == 0) // if mouse is idle
 		return;
 	const uint32_t playerbase = (uint32_t)MEM_ReadInt(TS2_playerbase);
@@ -71,7 +74,8 @@ static void TS2_Inject(void)
 	float camx = MEM_ReadFloat(playerbase + TS2_camx);
 	float camy = MEM_ReadFloat(playerbase + TS2_camy);
 	const float fov = MEM_ReadFloat(TS2_fov);
-	if(camx >= 0 && camx < 360 && camy >= -50 && camy <= 50 && fov > 3)
+	const float yaxislimit = MEM_ReadFloat(TS2_yaxislimit);
+	if(camx >= 0 && camx < 360 && camy >= -yaxislimit && camy <= yaxislimit && fov > 3)
 	{
 		camx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) * (fov / 60.f); // normal calculation method for X
 		camy += (float)(!invertpitch ? -ymouse : ymouse) / 10.f * ((float)sensitivity / 40.f) * (fov / 60.f); // normal calculation method for Y
@@ -79,7 +83,7 @@ static void TS2_Inject(void)
 			camx += 360;
 		else if(camx >= 360)
 			camx -= 360;
-		camy = ClampFloat(camy, -50, 50);
+		camy = ClampFloat(camy, -yaxislimit, yaxislimit);
 		MEM_WriteFloat(playerbase + TS2_camx, camx);
 		MEM_WriteFloat(playerbase + TS2_camy, camy);
 		if(crosshair) // if crosshair movement is enabled
