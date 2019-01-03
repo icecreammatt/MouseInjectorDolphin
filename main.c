@@ -69,6 +69,7 @@ int32_t main(void)
 	INI_Load(); // load settings
 	if(!welcomed) // if not welcomed before
 		GUI_Welcome(); // show welcome message - wait for user input before continuing
+	MEM_UpdateEmuoffset(); // update emuoffset before refreshing interface
 	GUI_Update(); // update screen with options
 	atexit(quit); // set function to run when program is closed
 	while(1)
@@ -199,6 +200,7 @@ static void GUI_Interact(void)
 static void GUI_Update(void)
 {
 	GUI_Clear();
+	GAME_Status(); // refresh driver for title
 	printf("\n Mouse Injector for %s %s\n", GAME_Name() == NULL ? DOLPHINVERSION : GAME_Name(), BUILDINFO); // title
 	printf("%s\n\n   Main Menu - Press [#] to Use Menu\n\n\n", LINE);
 	printf(mousetoggle ? "   [4] - [ON] Mouse Injection\n\n" : "   [4] - [OFF] Mouse Injection\n\n");
@@ -228,12 +230,13 @@ static void GUI_ListGames(void)
 {
 	GUI_Clear();
 	printf("\n Mouse Injector for %s %s\n%s\n\n", DOLPHINVERSION, BUILDINFO, LINE);
-	printf("   List of Supported Games (NTSC)\t\tGame IDs\n%s\n\n\n\n", LINE);
+	printf("   List of Supported Games (NTSC)\t\tGame IDs\n%s\n\n\n", LINE);
 	printf("    TimeSplitters 2\t\t\t\t GTSE4F\n\n");
 	printf("    TimeSplitters: Future Perfect\t\t G3FE69\n\n");
 	printf("    007: NightFire\t\t\t\t GO7E69\n\n");
 	printf("    Medal of Honor: Frontline\t\t\t GMFE69\n\n");
-	printf("    Die Hard: Vendetta\t\t\t\t GDIE7D\n\n\n\n\n");
+	printf("    Medal of Honor: European Assault\t\t GONE69\n\n");
+	printf("    Die Hard: Vendetta\t\t\t\t GDIE7D\n\n\n\n");
 	printf("   Returning to Main Menu in 5 Seconds...\n%s\n", LINE);
 }
 //==========================================================================

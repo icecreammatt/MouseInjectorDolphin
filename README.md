@@ -4,6 +4,7 @@ This is an __unfinished, alpha prototype__ for Dolphin. It supports the followin
 * TimeSplitters: Future Perfect
 * 007: NightFire
 * Medal of Honor: Frontline (save profile not included)
+* Medal of Honor: European Assault (save profile not included)
 * Die Hard: Vendetta (save profile not included)
 
 # ManyMouse
