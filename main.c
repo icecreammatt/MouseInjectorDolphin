@@ -33,7 +33,7 @@ static uint8_t locksettings = 0;
 static uint8_t welcomed = 0;
 
 uint8_t sensitivity = 20;
-uint8_t crosshair = 0;
+uint8_t crosshair = 3;
 uint8_t invertpitch = 0;
 
 int32_t main(void);
@@ -106,7 +106,7 @@ static void quit(void)
 static void GUI_Init(void)
 {
 	SetConsoleTitle("Mouse Injector");
-	MoveWindow(GetConsoleWindow(), 100, 100, 683, 336, TRUE); // get console window handle and move window to required position
+	system("mode 80, 25"); // set window height and width
 }
 //==========================================================================
 // Purpose: prints the welcome message

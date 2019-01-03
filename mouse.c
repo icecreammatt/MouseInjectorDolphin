@@ -53,7 +53,7 @@ void MOUSE_Lock(void)
 }
 //==========================================================================
 // Purpose: update xmouse/ymouse with mouse input
-// Changed Globals: xmouse, ymouse
+// Changed Globals: xmouse, ymouse, event
 //==========================================================================
 void MOUSE_Update(void)
 {
