@@ -22,7 +22,7 @@ RESFLAGS = -F pe-x86-64 --input-format=rc -O coff
 
 #Linker flags
 OBJS = $(OBJDIR)main.o $(OBJDIR)memory.o $(OBJDIR)mouse.o $(OBJDIR)manymouse.o $(OBJDIR)windows_wminput.o $(OBJDIR)icon.res
-GAMEOBJS = $(OBJDIR)game.o $(OBJDIR)ts2.o $(OBJDIR)ts3.o $(OBJDIR)nf.o $(OBJDIR)mohf.o $(OBJDIR)dhv.o
+GAMEOBJS = $(OBJDIR)game.o $(OBJDIR)ts2.o $(OBJDIR)ts3.o $(OBJDIR)nf.o $(OBJDIR)mohf.o $(OBJDIR)dhv.o $(OBJDIR)mohea.o
 LIBS = -static-libgcc -lpsapi
 LFLAGS = $(OBJS) $(GAMEOBJS) -o $(EXENAME) $(LIBS) -m64 -s
 
