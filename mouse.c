@@ -19,6 +19,7 @@
 //==========================================================================
 #include <stdint.h>
 #include <windows.h>
+#include "mouse.h"
 #include "./manymouse/manymouse.h"
 
 int32_t xmouse, ymouse; // holds mouse input data (used for gamedrivers)
