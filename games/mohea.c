@@ -30,6 +30,7 @@
 #define MOHEA_camx 0x80A7E610 - 0x80A7E500
 #define MOHEA_camy 0x80A7E608 - 0x80A7E500
 #define MOHEA_fov 0x80A7E638 - 0x80A7E500
+#define MOHEA_health 0x80A7E8D0 - 0x80A7E500
 // STATIC ADDRESSES BELOW
 #define MOHEA_playerbase 0x80574308
 
@@ -65,9 +66,10 @@ static void MOHEA_Inject(void)
 	if(NOTWITHINMEMRANGE(playerbase)) // if playerbase is invalid
 		return;
 	const float fov = MEM_ReadFloat(playerbase + MOHEA_fov);
+	const float health = MEM_ReadFloat(playerbase + MOHEA_health);
 	float camx = MEM_ReadFloat(playerbase + MOHEA_camx);
 	float camy = MEM_ReadFloat(playerbase + MOHEA_camy);
-	if(camx >= -TAU && camx <= TAU && camy >= -CROSSHAIRY && camy <= CROSSHAIRY)
+	if(camx >= -TAU && camx <= TAU && camy >= -CROSSHAIRY && camy <= CROSSHAIRY && health > 0)
 	{
 		camx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) / (360.f / TAU) / (35.f / fov); // normal calculation method for X
 		camy += (float)(!invertpitch ? -ymouse : ymouse) / 10.f * ((float)sensitivity / 40.f) / (90.f / CROSSHAIRY) / (35.f / fov); // normal calculation method for Y

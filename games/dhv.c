@@ -67,7 +67,7 @@ static uint8_t DHV_Status(void)
 }
 //==========================================================================
 // Purpose: detects player pointer from stack address
-// Changed Globals: playerbase
+// Changed Globals: fovbase, playerbase
 //==========================================================================
 static uint8_t DHV_DetectPlayer(void)
 {
