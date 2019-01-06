@@ -36,7 +36,7 @@
 #define MOHF_sentryylimit 0x806339B8 - 0x806335A0
 #define MOHF_sentryflag 0x80633C6C - 0x806335A0
 // STATIC ADDRESSES BELOW
-#define MOHF_playerbase 0x801DDDFC
+#define MOHF_playerbase 0x801DDDFC // playable character pointer
 
 static uint8_t MOHF_Status(void);
 static void MOHF_Inject(void);
@@ -51,13 +51,11 @@ static const GAMEDRIVER GAMEDRIVER_INTERFACE =
 const GAMEDRIVER *GAME_MOHF = &GAMEDRIVER_INTERFACE;
 
 //==========================================================================
-// Purpose: returns a value, which is then used to check what game is running in game.c
+// Purpose: return 1 if game is detected
 //==========================================================================
 static uint8_t MOHF_Status(void)
 {
-	if(MEM_ReadInt(0x80000000) == 0x474D4645 && MEM_ReadInt(0x80000004) == 0x36390000) // check game header to see if it matches MOHF
-		return 1;
-	return 0;
+	return (MEM_ReadInt(0x80000000) == 0x474D4645 && MEM_ReadInt(0x80000004) == 0x36390000); // check game header to see if it matches MOHF
 }
 //==========================================================================
 // Purpose: calculate mouse movement and inject into current game

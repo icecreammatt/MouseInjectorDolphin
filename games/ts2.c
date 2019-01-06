@@ -46,13 +46,11 @@ static const GAMEDRIVER GAMEDRIVER_INTERFACE =
 const GAMEDRIVER *GAME_TS2 = &GAMEDRIVER_INTERFACE;
 
 //==========================================================================
-// Purpose: returns a value, which is then used to check what game is running in game.c
+// Purpose: return 1 if game is detected
 //==========================================================================
 static uint8_t TS2_Status(void)
 {
-	if(MEM_ReadInt(0x80000000) == 0x47545345 && MEM_ReadInt(0x80000004) == 0x34460000) // check game header to see if it matches TS2
-		return 1;
-	return 0;
+	return (MEM_ReadInt(0x80000000) == 0x47545345 && MEM_ReadInt(0x80000004) == 0x34460000); // check game header to see if it matches TS2
 }
 //==========================================================================
 // Purpose: calculate mouse movement and inject into current game

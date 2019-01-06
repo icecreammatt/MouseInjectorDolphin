@@ -38,7 +38,7 @@
 #define DHV_fov 0x808A28F0 - 0x808A28D8
 // STATIC ADDRESSES BELOW
 #define DHV_playerbase 0x8032C178 // playable character pointer (random stack address because this game does not keep the player's pointer in one spot)
-#define DHV_fovbase 0x8032CA68
+#define DHV_fovbase 0x8032CA68 // fov base pointer
 
 static uint8_t DHV_Status(void);
 static uint8_t DHV_DetectPlayer(void);
@@ -57,13 +57,11 @@ static uint32_t fovbase = 0;
 const GAMEDRIVER *GAME_DHV = &GAMEDRIVER_INTERFACE;
 
 //==========================================================================
-// Purpose: returns a value, which is then used to check what game is running in game.c
+// Purpose: return 1 if game is detected
 //==========================================================================
 static uint8_t DHV_Status(void)
 {
-	if(MEM_ReadInt(0x80000000) == 0x47444945 && MEM_ReadInt(0x80000004) == 0x37440000) // check game header to see if it matches DHV
-		return 1;
-	return 0;
+	return (MEM_ReadInt(0x80000000) == 0x47444945 && MEM_ReadInt(0x80000004) == 0x37440000); // check game header to see if it matches DHV
 }
 //==========================================================================
 // Purpose: detects player pointer from stack address

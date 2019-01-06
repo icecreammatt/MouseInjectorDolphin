@@ -27,6 +27,7 @@ extern const GAMEDRIVER *GAME_NF;
 extern const GAMEDRIVER *GAME_MOHF;
 extern const GAMEDRIVER *GAME_MOHEA;
 extern const GAMEDRIVER *GAME_DHV;
+extern const GAMEDRIVER *GAME_COD2BRO;
 
 static const GAMEDRIVER **GAMELIST[] =
 {
@@ -35,7 +36,8 @@ static const GAMEDRIVER **GAMELIST[] =
 	&GAME_NF,
 	&GAME_MOHF,
 	&GAME_MOHEA,
-	&GAME_DHV
+	&GAME_DHV,
+	&GAME_COD2BRO
 };
 
 static const GAMEDRIVER *CURRENT_GAME = NULL;

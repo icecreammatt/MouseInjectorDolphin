@@ -175,10 +175,10 @@ static void GUI_Interact(void)
 			crosshair--, updateinterface = 1;
 		updatequick = 1;
 	}
-	if(K_INSERT && !locksettings && !updateinterface) // show list of supported games (INSERT)
+	if(K_INSERT && !locksettings && !updateinterface && !mousetoggle) // show list of supported games (INSERT)
 	{
 		GUI_ListGames();
-		Sleep(5000); // wait 5 seconds
+		Sleep(10 * 1000); // wait 10 seconds
 		K_INSERT; // flush input
 		updateinterface = 1;
 		updatequick = 1;
@@ -214,14 +214,16 @@ static void GUI_Update(void)
 		printf(invertpitch ? "   [7] - [ON] Invert Pitch\n\n" : "   [7] - [OFF] Invert Pitch\n\n");
 		printf("\n\n\n\n\n");
 		printf("   [CTRL+0] - Lock Settings\n\n");
-		printf(" Note: [+/-] to Change Values - [Insert] for Supported Games\n%s\n", LINE);
 	}
 	else
 	{
 		printf("\n\n\n\n\n\n\n\n\n\n\n");
 		printf("   [CTRL+0] - Unlock Settings\n\n");
-		printf(" Note: [+/-] to Change Values\n%s\n", LINE);
 	}
+	if(mousetoggle || locksettings)
+		printf(" Note: [+/-] to Change Values\n%s\n", LINE);
+	else
+		printf(" Note: [+/-] to Change Values - [Insert] for Supported Games\n%s\n", LINE);
 }
 //==========================================================================
 // Purpose: print list of supported games
@@ -230,14 +232,15 @@ static void GUI_ListGames(void)
 {
 	GUI_Clear();
 	printf("\n Mouse Injector for %s %s\n%s\n\n", DOLPHINVERSION, BUILDINFO, LINE);
-	printf("   List of Supported Games (NTSC)\t\tGame IDs\n%s\n\n\n", LINE);
+	printf("   List of Supported Games (NTSC)\t\tGame IDs\n%s\n\n", LINE);
 	printf("    TimeSplitters 2\t\t\t\t GTSE4F\n\n");
 	printf("    TimeSplitters: Future Perfect\t\t G3FE69\n\n");
 	printf("    007: NightFire\t\t\t\t GO7E69\n\n");
 	printf("    Medal of Honor: Frontline\t\t\t GMFE69\n\n");
 	printf("    Medal of Honor: European Assault\t\t GONE69\n\n");
-	printf("    Die Hard: Vendetta\t\t\t\t GDIE7D\n\n\n\n");
-	printf("   Returning to Main Menu in 5 Seconds...\n%s\n", LINE);
+	printf("    Call of Duty 2: Big Red One\t\t\t GQCE52\n\n");
+	printf("    Die Hard: Vendetta\t\t\t\t GDIE7D\n\n\n");
+	printf("   Returning to Main Menu in 10 Seconds...\n%s\n", LINE);
 }
 //==========================================================================
 // Purpose: clear screen without using system("cls")
