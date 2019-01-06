@@ -64,20 +64,7 @@ static void COD2BRO_Inject(void)
 		return;
 	const float fov = MEM_ReadFloat(playerbase + COD2BRO_fov);
 	const float tankfov = MEM_ReadFloat(playerbase + COD2BRO_tankfov);
-	if(fov > 0 && fov <= 1.f) // if player is on foot
-	{
-		float camx = MEM_ReadFloat(playerbase + COD2BRO_camx);
-		float camy = MEM_ReadFloat(playerbase + COD2BRO_camy);
-		camx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) * (fov / 1.f); // normal calculation method for X
-		camy += (float)(invertpitch ? -ymouse : ymouse) / 10.f * ((float)sensitivity / 40.f) * (fov / 1.f); // normal calculation method for Y
-		if(camx < -360)
-			camx += 360;
-		else if(camx >= 360)
-			camx -= 360;
-		MEM_WriteFloat(playerbase + COD2BRO_camx, camx);
-		MEM_WriteFloat(playerbase + COD2BRO_camy, camy);
-	}
-	else if(tankfov > 0 && tankfov <= 1.f) // if player is in tank
+	if(tankfov > 0 && tankfov <= 1.f) // if player is in tank
 	{
 		float tankx = MEM_ReadFloat(playerbase + COD2BRO_tankx);
 		float tanky = MEM_ReadFloat(playerbase + COD2BRO_tanky);
@@ -89,5 +76,18 @@ static void COD2BRO_Inject(void)
 			tankx -= 360;
 		MEM_WriteFloat(playerbase + COD2BRO_tankx, tankx);
 		MEM_WriteFloat(playerbase + COD2BRO_tanky, tanky);
+	}
+	else if(fov > 0 && fov <= 1.f) // if player is on foot
+	{
+		float camx = MEM_ReadFloat(playerbase + COD2BRO_camx);
+		float camy = MEM_ReadFloat(playerbase + COD2BRO_camy);
+		camx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) * (fov / 1.f); // normal calculation method for X
+		camy += (float)(invertpitch ? -ymouse : ymouse) / 10.f * ((float)sensitivity / 40.f) * (fov / 1.f); // normal calculation method for Y
+		if(camx < -360)
+			camx += 360;
+		else if(camx >= 360)
+			camx -= 360;
+		MEM_WriteFloat(playerbase + COD2BRO_camx, camx);
+		MEM_WriteFloat(playerbase + COD2BRO_camy, camy);
 	}
 }
