@@ -64,12 +64,12 @@ static void COD2BRO_Inject(void)
 		return;
 	const float fov = MEM_ReadFloat(playerbase + COD2BRO_fov);
 	const float tankfov = MEM_ReadFloat(playerbase + COD2BRO_tankfov);
-	if(tankfov > 0 && tankfov <= 1.f) // if player is in tank
+	if(tankfov == 0.6999999881f || tankfov == 0.2799999714f) // if player is in tank
 	{
 		float tankx = MEM_ReadFloat(playerbase + COD2BRO_tankx);
 		float tanky = MEM_ReadFloat(playerbase + COD2BRO_tanky);
-		tankx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) * (tankfov / 1.f); // normal calculation method for X
-		tanky += (float)(invertpitch ? -ymouse : ymouse) / 10.f * ((float)sensitivity / 40.f) * (tankfov / 1.f); // normal calculation method for Y
+		tankx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) * (tankfov / 0.6999999881f); // normal calculation method for X
+		tanky += (float)(invertpitch ? -ymouse : ymouse) / 10.f * ((float)sensitivity / 40.f) * (tankfov / 0.6999999881f); // normal calculation method for Y
 		if(tankx < -360)
 			tankx += 360;
 		else if(tankx >= 360)
