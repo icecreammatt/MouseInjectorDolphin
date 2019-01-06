@@ -83,6 +83,8 @@ static void COD2BRO_Inject(void)
 	COD2BRO_DetectInterface();
 	if(NOTWITHINMEMRANGE(playerbase))
 		return;
+	if(xmouse == 0 && ymouse == 0) // if mouse is idle
+		return;
 	uint32_t fovaddress, camxaddress, camyaddress;
 	float fov, camx, camy;
 	if(!vehiclemode) // if player is using on foot interface
@@ -103,8 +105,6 @@ static void COD2BRO_Inject(void)
 		camx = MEM_ReadFloat(camxaddress);
 		camy = MEM_ReadFloat(camyaddress);
 	}
-	if(xmouse == 0 && ymouse == 0) // if mouse is idle
-		return;
 	if(!vehiclemode && fov > 0 && fov <= 1.25f || fov <= 2.f) // if fov is valid
 	{
 		camx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) * (fov / 1.f); // normal calculation method for X
