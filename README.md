@@ -3,6 +3,7 @@ This is an __unfinished, alpha prototype__ for Dolphin. It supports the followin
 * TimeSplitters 2
 * TimeSplitters: Future Perfect
 * 007: NightFire
+
 The follow games do not have any preconfigured input profiles or saves
 * Medal of Honor: Frontline
 * Medal of Honor: European Assault
