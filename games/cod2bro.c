@@ -23,13 +23,15 @@
 #include "../mouse.h"
 #include "game.h"
 
-#define CROSSHAIRY 87.890625f // 0x42AFC800
 // COD2BRO ADDRESSES - OFFSET ADDRESSES BELOW (REQUIRES PLAYERBASE TO USE)
-#define COD2BRO_camx 0x8048B574 - 0x80466E50
-#define COD2BRO_camy 0x8048B570 - 0x80466E50
-#define COD2BRO_fov 0x8048B54C - 0x80466E50
+#define COD2BRO_camx 0x8048B574 - 0x80483280
+#define COD2BRO_camy 0x8048B570 - 0x80483280
+#define COD2BRO_fov 0x8048B54C - 0x80483280
+#define COD2BRO_tankx 0x8044B2F4 - 0x80442FE0
+#define COD2BRO_tanky 0x8044B2F0 - 0x80442FE0
+#define COD2BRO_tankfov 0x8044B2CC - 0x80442FE0
 // STATIC ADDRESSES BELOW
-#define COD2BRO_playerbase 0x815566F0 // playable character pointer
+#define COD2BRO_playerbase 0x800030D4 // playable character pointer
 
 static uint8_t COD2BRO_Status(void);
 static void COD2BRO_Inject(void);
@@ -57,14 +59,15 @@ static void COD2BRO_Inject(void)
 {
 	if(xmouse == 0 && ymouse == 0) // if mouse is idle
 		return;
-	const uint32_t playerbase = (uint32_t)MEM_ReadInt(COD2BRO_playerbase);
-	if(!playerbase) // if playerbase is invalid
+	const uint32_t playerbase = ((uint32_t)MEM_ReadInt(COD2BRO_playerbase)) + 0x80000000; // offset playerbase to RAM range
+	if(NOTWITHINMEMRANGE(playerbase)) // if playerbase is invalid
 		return;
-	float camx = MEM_ReadFloat(playerbase + COD2BRO_camx);
-	float camy = MEM_ReadFloat(playerbase + COD2BRO_camy);
 	const float fov = MEM_ReadFloat(playerbase + COD2BRO_fov);
-	if(fov > 0 && fov <= 1.f)
+	const float tankfov = MEM_ReadFloat(playerbase + COD2BRO_tankfov);
+	if(fov > 0 && fov <= 1.f) // if player is on foot
 	{
+		float camx = MEM_ReadFloat(playerbase + COD2BRO_camx);
+		float camy = MEM_ReadFloat(playerbase + COD2BRO_camy);
 		camx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) * (fov / 1.f); // normal calculation method for X
 		camy += (float)(invertpitch ? -ymouse : ymouse) / 10.f * ((float)sensitivity / 40.f) * (fov / 1.f); // normal calculation method for Y
 		if(camx < -360)
@@ -73,5 +76,18 @@ static void COD2BRO_Inject(void)
 			camx -= 360;
 		MEM_WriteFloat(playerbase + COD2BRO_camx, camx);
 		MEM_WriteFloat(playerbase + COD2BRO_camy, camy);
+	}
+	else if(tankfov > 0 && tankfov <= 1.f) // if player is in tank
+	{
+		float tankx = MEM_ReadFloat(playerbase + COD2BRO_tankx);
+		float tanky = MEM_ReadFloat(playerbase + COD2BRO_tanky);
+		tankx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) * (tankfov / 1.f); // normal calculation method for X
+		tanky += (float)(invertpitch ? -ymouse : ymouse) / 10.f * ((float)sensitivity / 40.f) * (tankfov / 1.f); // normal calculation method for Y
+		if(tankx < -360)
+			tankx += 360;
+		else if(tankx >= 360)
+			tankx -= 360;
+		MEM_WriteFloat(playerbase + COD2BRO_tankx, tankx);
+		MEM_WriteFloat(playerbase + COD2BRO_tanky, tanky);
 	}
 }
