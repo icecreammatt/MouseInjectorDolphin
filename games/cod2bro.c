@@ -101,7 +101,7 @@ static void COD2BRO_Inject(void)
 	const float fov = MEM_ReadFloat(fovaddress);
 	float camx = MEM_ReadFloat(camxaddress);
 	float camy = MEM_ReadFloat(camyaddress);
-	if(!vehiclemode && fov > 0 && fov <= 1.25f || fov <= 2.f) // if fov is valid
+	if(!vehiclemode && fov > 0 && fov <= 1.25f || vehiclemode && fov <= 2.f) // if fov is valid
 	{
 		camx -= (float)xmouse / 10.f * ((float)sensitivity / 40.f) * (fov / 1.f); // normal calculation method for X
 		camy += (float)(invertpitch ? -ymouse : ymouse) / 10.f * ((float)sensitivity / 40.f) * (fov / 1.f); // normal calculation method for Y
