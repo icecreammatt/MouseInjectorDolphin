@@ -46,6 +46,7 @@ static void GUI_ListGames(void);
 static void GUI_Clear(void);
 static void INI_Load(void);
 static void INI_Save(void);
+
 //==========================================================================
 // Purpose: run everything like a god damn speed demon
 //==========================================================================
@@ -71,12 +72,9 @@ int32_t main(void)
 	MEM_UpdateEmuoffset(); // update emuoffset before refreshing interface
 	GUI_Update(); // update screen with options
 	atexit(quit); // set function to run when program is closed
-	unsigned char pollhotkeys = 0;
 	while(1)
 	{
-		pollhotkeys--;
-		if(pollhotkeys % 16 == 0)
-			GUI_Interact(); // check hotkey input
+		GUI_Interact(); // check hotkey input
 		if(mousetoggle)
 		{
 			if(GAME_Status()) // if supported game has been detected
