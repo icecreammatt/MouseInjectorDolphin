@@ -46,7 +46,6 @@ static void GUI_ListGames(void);
 static void GUI_Clear(void);
 static void INI_Load(void);
 static void INI_Save(void);
-
 //==========================================================================
 // Purpose: run everything like a god damn speed demon
 //==========================================================================
@@ -72,9 +71,12 @@ int32_t main(void)
 	MEM_UpdateEmuoffset(); // update emuoffset before refreshing interface
 	GUI_Update(); // update screen with options
 	atexit(quit); // set function to run when program is closed
+	unsigned char pollhotkeys = 0;
 	while(1)
 	{
-		GUI_Interact(); // check hotkey input
+		pollhotkeys--;
+		if(pollhotkeys % 16 == 0)
+			GUI_Interact(); // check hotkey input
 		if(mousetoggle)
 		{
 			if(GAME_Status()) // if supported game has been detected
@@ -208,8 +210,8 @@ static void GUI_Update(void)
 	{
 		printf("   [5] - Mouse Sensitivity: %d%%", sensitivity * 5);
 		printf(selectedoption == EDITINGSENSITIVITY ? " [+/-]\n\n" : "\n\n");
-		printf("   [6] - Crosshair Movement: ");
-		printf(crosshair ? "%d%%" : "Disabled", crosshair * 100 / 6);
+		printf("   [6] - Crosshair Sway: ");
+		printf(crosshair ? "%d%%" : "Locked", crosshair * 100 / 6);
 		printf(selectedoption == EDITINGCROSSHAIR ? " [+/-]\n\n" : "\n\n");
 		printf(invertpitch ? "   [7] - [ON] Invert Pitch\n\n" : "   [7] - [OFF] Invert Pitch\n\n");
 		printf("\n\n\n\n\n");

@@ -34,7 +34,7 @@
 // STATIC ADDRESSES BELOW
 #define TS3_playerbase 0x80611D74 // playable character pointer
 #define TS3_fovbase 0x80611D5C // fov base pointer
-#define TS3_crosshairsetting 0x80501680 // crosshair movement settings (1 == on and moving)
+#define TS3_crosshairsetting 0x80501680 // crosshair settings (1 == on and moving)
 #define TS3_yaxislimit 0x80611D7C
 
 static uint8_t TS3_Status(void);
@@ -57,7 +57,7 @@ static uint8_t TS3_Status(void)
 	return (MEM_ReadInt(0x80000000) == 0x47334645 && MEM_ReadInt(0x80000004) == 0x36390000); // check game header to see if it matches TS3
 }
 //==========================================================================
-// Purpose: calculate mouse movement and inject into current game
+// Purpose: calculate mouse look and inject into current game
 //==========================================================================
 static void TS3_Inject(void)
 {
@@ -84,9 +84,9 @@ static void TS3_Inject(void)
 		camy = ClampFloat(camy, -yaxislimit, yaxislimit);
 		MEM_WriteFloat(playerbase + TS3_camx, camx);
 		MEM_WriteFloat(playerbase + TS3_camy, camy);
-		if(crosshair && MEM_ReadInt(TS3_crosshairsetting) <= 1) // if crosshair movement is enabled and turned on in-game
+		if(crosshair && MEM_ReadInt(TS3_crosshairsetting) <= 1) // if crosshair sway is enabled and turned on in-game
 		{
-			float crosshairx = MEM_ReadFloat(playerbase + TS3_crosshairx), gunx = MEM_ReadFloat(playerbase + TS3_gunx); // after camera x and y have been calculated and injected, calculate the crosshair/gun movement
+			float crosshairx = MEM_ReadFloat(playerbase + TS3_crosshairx), gunx = MEM_ReadFloat(playerbase + TS3_gunx); // after camera x and y have been calculated and injected, calculate the crosshair/gun sway
 			crosshairx += ((float)xmouse / 80.f) * ((float)crosshair / 80.f) * (fov / 55.f);
 			gunx += ((float)xmouse / 80.f) * ((float)crosshair / 80.f) * (fov / 55.f) / 1.5f;
 			MEM_WriteFloat(playerbase + TS3_crosshairx, ClampFloat(crosshairx, -1.f, 1.f));

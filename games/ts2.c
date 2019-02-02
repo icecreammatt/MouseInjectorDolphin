@@ -53,7 +53,7 @@ static uint8_t TS2_Status(void)
 	return (MEM_ReadInt(0x80000000) == 0x47545345 && MEM_ReadInt(0x80000004) == 0x34460000); // check game header to see if it matches TS2
 }
 //==========================================================================
-// Purpose: calculate mouse movement and inject into current game
+// Purpose: calculate mouse look and inject into current game
 //==========================================================================
 static void TS2_Inject(void)
 {
@@ -84,9 +84,9 @@ static void TS2_Inject(void)
 		camy = ClampFloat(camy, -yaxislimit, yaxislimit);
 		MEM_WriteFloat(playerbase + TS2_camx, camx);
 		MEM_WriteFloat(playerbase + TS2_camy, camy);
-		if(crosshair) // if crosshair movement is enabled
+		if(crosshair) // if crosshair sway is enabled
 		{
-			float crosshairx = MEM_ReadFloat(playerbase + TS2_crosshairx); // after camera x and y have been calculated and injected, calculate the crosshair/gun movement
+			float crosshairx = MEM_ReadFloat(playerbase + TS2_crosshairx); // after camera x and y have been calculated and injected, calculate the crosshair/gun sway
 			float crosshairy = MEM_ReadFloat(playerbase + TS2_crosshairy);
 			crosshairx += ((float)xmouse / 80.f) * ((float)crosshair / 80.f) * (fov / 55.f);
 			crosshairy += ((float)(!invertpitch ? ymouse : -ymouse) / 80.f) * ((float)crosshair / 80.f) * (fov / 55.f);

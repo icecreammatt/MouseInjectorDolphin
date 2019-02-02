@@ -88,7 +88,7 @@ static uint8_t DHV_DetectPlayer(void)
 	return WITHINMEMRANGE(playerbase);
 }
 //==========================================================================
-// Purpose: calculate mouse movement and inject into current game
+// Purpose: calculate mouse look and inject into current game
 //==========================================================================
 static void DHV_Inject(void)
 {
@@ -109,9 +109,9 @@ static void DHV_Inject(void)
 		camy = ClampFloat(camy, CAMYMINUS, CAMYPLUS);
 		MEM_WriteFloat(playerbase + DHV_camx, camx);
 		MEM_WriteFloat(playerbase + DHV_camy, camy);
-		if(crosshair) // if crosshair movement is enabled
+		if(crosshair) // if crosshair sway is enabled
 		{
-			float crosshairx = MEM_ReadFloat(playerbase + DHV_crosshairx); // after camera x and y have been calculated and injected, calculate the crosshair/gun movement
+			float crosshairx = MEM_ReadFloat(playerbase + DHV_crosshairx); // after camera x and y have been calculated and injected, calculate the crosshair/gun sway
 			float crosshairy = MEM_ReadFloat(playerbase + DHV_crosshairy);
 			crosshairx -= ((float)xmouse / 80.f) * ((float)crosshair / 80.f) / (1.2f / fov);
 			crosshairy -= ((float)(!invertpitch ? ymouse : -ymouse) / 80.f) * ((float)crosshair / 80.f) / (1.2f / fov);

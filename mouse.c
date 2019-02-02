@@ -25,7 +25,8 @@
 int32_t xmouse, ymouse; // holds mouse input data (used for gamedrivers)
 
 static POINT mouselock; // center screen X and Y var for mouse
-static ManyMouseEvent event; // hold current mouse movement event
+static ManyMouseEvent event; // hold current mouse event
+static unsigned char lockmouseclock = 0; // limit SetCursorPos execution
 
 uint8_t MOUSE_Init(void);
 void MOUSE_Quit(void);
@@ -58,7 +59,8 @@ void MOUSE_Lock(void)
 //==========================================================================
 void MOUSE_Update(void)
 {
-	SetCursorPos(mouselock.x, mouselock.y); // set mouse position back to center of screen
+	if(lockmouseclock % 25 == 0) // don't execute every tick
+		SetCursorPos(mouselock.x, mouselock.y); // set mouse position back to center of screen
 	xmouse = ymouse = 0; // reset mouse input
 	while(ManyMouse_PollEvent(&event))
 	{
@@ -70,4 +72,5 @@ void MOUSE_Update(void)
 				ymouse += event.value;
 		}
 	}
+	lockmouseclock--;
 }

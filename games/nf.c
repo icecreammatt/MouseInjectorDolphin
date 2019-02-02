@@ -66,7 +66,7 @@ static uint8_t NF_Status(void)
 	return (MEM_ReadInt(0x80000000) == 0x474F3745 && MEM_ReadInt(0x80000004) == 0x36390000); // check game header to see if it matches NF
 }
 //==========================================================================
-// Purpose: calculate mouse movement and inject into current game
+// Purpose: calculate mouse look and inject into current game
 //==========================================================================
 static void NF_Inject(void)
 {
@@ -93,9 +93,9 @@ static void NF_Inject(void)
 			camy = ClampFloat(camy, -1.f, 1.f);
 			MEM_WriteFloat(playerbase + NF_camx, camx);
 			MEM_WriteFloat(playerbase + NF_camy, camy);
-			if(crosshair) // if crosshair movement is enabled
+			if(crosshair) // if crosshair sway is enabled
 			{
-				float crosshairx = MEM_ReadFloat(playerbase + NF_crosshairx); // after camera x and y have been calculated and injected, calculate the crosshair/gun movement
+				float crosshairx = MEM_ReadFloat(playerbase + NF_crosshairx); // after camera x and y have been calculated and injected, calculate the crosshair/gun sway
 				float crosshairy = MEM_ReadFloat(playerbase + NF_crosshairy);
 				crosshairx += ((float)xmouse / 80.f) * ((float)crosshair / 80.f) / (fov / 1.f);
 				crosshairy += ((float)(!invertpitch ? -ymouse : ymouse) / 80.f) * ((float)crosshair / 80.f) / (fov / 1.f);

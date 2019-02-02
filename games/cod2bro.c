@@ -76,7 +76,7 @@ static void COD2BRO_DetectInterface(void)
 	vehiclemode = footfov == 0 && vehiclefov != 0; // if on foot fov doesn't equal default zoom value and tank fov is non-zero, likely map is using vehicle interface
 }
 //==========================================================================
-// Purpose: calculate mouse movement and inject into current game
+// Purpose: calculate mouse look and inject into current game
 //==========================================================================
 static void COD2BRO_Inject(void)
 {

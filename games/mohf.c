@@ -58,7 +58,7 @@ static uint8_t MOHF_Status(void)
 	return (MEM_ReadInt(0x80000000) == 0x474D4645 && MEM_ReadInt(0x80000004) == 0x36390000); // check game header to see if it matches MOHF
 }
 //==========================================================================
-// Purpose: calculate mouse movement and inject into current game
+// Purpose: calculate mouse look and inject into current game
 //==========================================================================
 static void MOHF_Inject(void)
 {
